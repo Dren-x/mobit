@@ -1,0 +1,33 @@
+{% extends 'BlogBlogBundle::layout.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+{% block title %}Обратная связь{% endblock%}
+
+{% block body %}
+    <header>
+        <h1>Заполните форму:</h1></br>
+
+    </header>
+
+        {% for flashMessage in app.session.flashbag.get('blog-notice') %}
+            <div class="blog-notice">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+
+    <form action="{{ path('BlogBlogBundle_contact') }}" method="post" {{ form_enctype(form) }} class="blog">
+
+   {{ form_errors(form) }}
+
+        {{ form_row(form.name) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.subject) }}
+        {{ form_row(form.body) }}
+
+        {{ form_rest(form) }}
+
+        <input type="submit" value="Отправить" />
+
+
+
+
+{% endblock %}
